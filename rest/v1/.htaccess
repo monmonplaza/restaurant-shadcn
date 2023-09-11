@@ -1,0 +1,42 @@
+RewriteEngine On
+# use for authentication
+RewriteCond %{HTTP:Authorization} ^(.+)$
+RewriteRule .* - [E=HTTP_AUTHORIZATION:%{HTTP:Authorization}]
+RewriteCond %{REQUEST_FILENAME} !-d
+RewriteCond %{REQUEST_FILENAME} !-f
+
+Header set Access-Control-Allow-Origin *
+ 
+#role
+RewriteRule ^roles$ controllers/settings/user/role/role.php [L]
+RewriteRule ^roles/([0-9]+)$ controllers/settings/user/role/role.php?roleid=$1 [L]
+RewriteRule ^roles/active/([0-9]+)$ controllers/settings/user/role/active.php?roleid=$1 [L]
+
+### SYSTEM USER ###
+RewriteRule ^user-system$ controllers/developer/settings/user/system/system.php [L]
+RewriteRule ^user-system/([0-9]+)$ controllers/developer/settings/user/system/system.php?usersystemid=$1 [L]
+RewriteRule ^user-system/active/([0-9]+)$ controllers/developer/settings/user/system/active.php?usersystemid=$1 [L]
+RewriteRule ^user-system/search$ controllers/developer/settings/user/system/search.php [L]
+RewriteRule ^user-system/key/([A-Za-z0-9-]+)$ controllers/developer/settings/user/system/key.php?usersystemkey=$1 [L]
+RewriteRule ^user-system/page/([0-9]+)$ controllers/developer/settings/user/system/page.php?start=$1 [L]
+RewriteRule ^user-system/password$ controllers/developer/settings/user/system/set-password.php [L]
+RewriteRule ^user-system/login$ controllers/developer/settings/user/system/login.php [L]
+RewriteRule ^user-system/token$ controllers/developer/settings/user/system/token.php [L]
+RewriteRule ^user-system/reset$ controllers/developer/settings/user/system/reset-password.php [L]
+RewriteRule ^user-system/verify-email/([A-Za-z0-9-]+)$ controllers/developer/settings/user/system/update-email.php?usersystemkey=$1 [L]
+RewriteRule ^user-system/roles$ controllers/developer/settings/user/system/read-role.php [L]
+
+#user-other
+RewriteRule ^user-others$ controllers/settings/user/other/other.php [L]
+RewriteRule ^user-others/([0-9]+)$ controllers/settings/user/other/other.php?userotherid=$1 [L]
+RewriteRule ^user-others/active/([0-9]+)$ controllers/settings/user/other/active.php?userotherid=$1 [L]
+RewriteRule ^user-others/limit/([0-9]+)/([0-9]+)$ controllers/settings/user/other/limit.php?start=$1&total=$2 [L]
+RewriteRule ^user-others/search/([A-Za-z0-9-]+)$ controllers/settings/user/other/search.php?search=$1 [L]
+RewriteRule ^user-others/key/([A-Za-z0-9-]+)$ controllers/settings/user/other/key.php?userotherkey=$1 [L]
+RewriteRule ^user-others/password$ controllers/settings/user/other/set-password.php [L]
+RewriteRule ^user-others/login$ controllers/settings/user/other/login.php [L]
+RewriteRule ^user-others/token$ controllers/settings/user/other/token.php [L]
+RewriteRule ^user-others/reset$ controllers/settings/user/other/reset-password.php [L]
+
+
+ 
