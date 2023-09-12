@@ -1,10 +1,19 @@
+import { setIsFoodOpen } from "@/store/StoreAction.jsx";
+import { StoreContext } from "@/store/StoreContext.jsx";
 import React from "react";
-import { Link } from "react-router-dom";
+import { BsMoonFill, BsSunFill } from "react-icons/bs";
 import { FaCaretRight, FaHome, FaReceipt } from "react-icons/fa";
-import { BsSunFill, BsMoonFill } from "react-icons/bs";
-import { MdTableRestaurant } from "react-icons/md";
 import { ImSpoonKnife } from "react-icons/im";
+import { MdTableRestaurant } from "react-icons/md";
+import { Link } from "react-router-dom";
+
 const Navigation = () => {
+  const { store, dispatch } = React.useContext(StoreContext);
+
+  const handleOpenSubMenu = () => {
+    dispatch(setIsFoodOpen(!store.isFoodOpen));
+  };
+
   return (
     <>
       <nav className="h-full">
@@ -19,27 +28,37 @@ const Navigation = () => {
               <Link to="/">Order</Link>
             </li>
 
-            <li className="has__dropdown  ">
+            <li className={`has__dropdown ${store.isFoodOpen ? "active" : ""}`}>
               <div className="">
                 <ImSpoonKnife
                   className="text-xl
               "
                 />
-                <button className="w-full flex justify-between items-center">
+                <button
+                  className="w-full flex justify-between items-center"
+                  onClick={handleOpenSubMenu}
+                >
                   Food
                   <span>
                     <FaCaretRight />
                   </span>
                 </button>
               </div>
-              <ul className="mt-1">
-                <li className="nav-subitem active-submenu">
-                  <Link to="/">Category</Link>
-                </li>
-                <li className="nav-subitem">
-                  <Link to="/">Tag</Link>
-                </li>
-              </ul>
+
+              {store.isFoodOpen && (
+                <ul className="py-1">
+                  <li className="nav-subitem ">
+                    <Link to="/">Food List</Link>
+                  </li>
+
+                  <li className="nav-subitem ">
+                    <Link to="/">Category</Link>
+                  </li>
+                  <li className="nav-subitem">
+                    <Link to="/">Tag</Link>
+                  </li>
+                </ul>
+              )}
             </li>
 
             <li className="nav-item ">

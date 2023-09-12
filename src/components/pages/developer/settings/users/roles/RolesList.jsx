@@ -1,8 +1,9 @@
+import ServerError from "@/components/partials/ServerError.jsx";
 import React from "react";
-import { Link } from "react-router-dom";
+import { FaTrash } from "react-icons/fa";
 import { HiDotsHorizontal } from "react-icons/hi";
 import { MdArchive, MdDelete, MdEdit, MdRestorePage } from "react-icons/md";
-import SearchBar from "../../../../../partials/SearchBar";
+import { Link } from "react-router-dom";
 import {
   setIsAdd,
   setIsConfirm,
@@ -10,15 +11,15 @@ import {
   setIsRestore,
 } from "../../../../../../store/StoreAction";
 import { StoreContext } from "../../../../../../store/StoreContext";
-import TableLoading from "../../../../../partials/TableLoading";
 import useQueryData from "../../../../../custom-hooks/useQueryData";
-import Pills from "../../../../../partials/Pills";
 import Footer from "../../../../../partials/Footer";
-import TableSpinner from "../../../../../partials/spinners/TableSpinner";
 import NoData from "../../../../../partials/NoData";
+import Pills from "../../../../../partials/Pills";
+import SearchBar from "../../../../../partials/SearchBar";
+import TableLoading from "../../../../../partials/TableLoading";
 import ModalArchive from "../../../../../partials/modals/ModalArchive";
-import { FaTrash } from "react-icons/fa";
 import ModalDelete from "../../../../../partials/modals/ModalDelete";
+import TableSpinner from "../../../../../partials/spinners/TableSpinner";
 const RolesList = ({ setItemEdit }) => {
   const { store, dispatch } = React.useContext(StoreContext);
   const [dataItem, setData] = React.useState(null);

@@ -13,6 +13,7 @@ const initVal = {
   isAdd: false,
   isSearch: false,
   isDelete: false,
+  isFoodOpen: false,
   startIndex: 0,
   isCreatePassSuccess: false,
   isForgetPassSuccess: false,

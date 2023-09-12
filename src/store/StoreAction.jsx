@@ -82,6 +82,13 @@ export const setIsDelete = (val) => {
   };
 };
 
+export const setIsFoodOpen = (val) => {
+  return {
+    type: "IS_FOOD_OPEN",
+    payload: val,
+  };
+};
+
 export const setStartIndex = (val) => {
   return {
     type: "START_INDEX",

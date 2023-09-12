@@ -72,6 +72,12 @@ export const StoreReducer = (state, action) => {
         isDelete: action.payload,
       };
 
+    case "IS_FOOD_OPEN":
+      return {
+        ...state,
+        isFoodOpen: action.payload,
+      };
+
     case "START_INDEX":
       return {
         ...state,

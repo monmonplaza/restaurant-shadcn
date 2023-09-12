@@ -1,9 +1,8 @@
 "use client";
 
-import * as React from "react";
 import { Check, ChevronsUpDown } from "lucide-react";
+import * as React from "react";
 
-import { cn } from "@/lib/utils";
 import { Button } from "@/components/ui/button";
 import {
   Command,
@@ -17,47 +16,49 @@ import {
   PopoverContent,
   PopoverTrigger,
 } from "@/components/ui/popover";
+import { cn } from "@/lib/utils";
 
 const combobox = ({ roles }) => {
   const [open, setOpen] = React.useState(false);
   const [value, setValue] = React.useState("");
 
   return (
-    <Popover open={open} onOpenChange={setOpen}>
+    <Popover>
       <PopoverTrigger asChild>
         <Button
           variant="outline"
           role="combobox"
-          aria-expanded={open}
-          className="w-[200px] justify-between"
+          className={cn(
+            "w-[200px] justify-between",
+            !field.value && "text-muted-foreground"
+          )}
         >
-          {value
-            ? roles.find((role) => role.role_aid === value)?.role_aid
-            : "Select framework..."}
-          <ChevronsUpDown className="ml-2 h-4 w-4 shrink-0 opacity-50" />
+          {field.value
+            ? roles.find((role) => role.roles_aid === field.value)?.label
+            : "Select Roles"}
+          <CaretSortIcon className="ml-2 h-4 w-4 shrink-0 opacity-50" />
         </Button>
       </PopoverTrigger>
       <PopoverContent className="w-[200px] p-0">
         <Command>
-          <CommandInput placeholder="Search framework..." />
+          <CommandInput placeholder="Search framework..." className="h-9" />
           <CommandEmpty>No framework found.</CommandEmpty>
           <CommandGroup>
-            {roles.map((role, key) => (
+            {roles.map((role) => (
               <CommandItem
-                key={key}
-                onSelect={(currentValue) => {
-                  setValue(currentValue === role.role_aid ? "" : currentValue);
-                  setOpen(false);
-                  console.log(currentValue);
+                value={role.roles_name}
+                key={role.roles_aid}
+                onSelect={() => {
+                  form.setValue("language", role.roles_aid);
                 }}
               >
-                <Check
+                {role.role_name}
+                <CheckIcon
                   className={cn(
-                    "mr-2 h-4 w-4",
-                    value === role.role_aid ? "opacity-100" : "opacity-0"
+                    "ml-auto h-4 w-4",
+                    role.roles_aid === field.value ? "opacity-100" : "opacity-0"
                   )}
                 />
-                {role.role_name}
               </CommandItem>
             ))}
           </CommandGroup>

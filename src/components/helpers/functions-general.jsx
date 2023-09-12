@@ -4,8 +4,11 @@ import { setIsAdd } from "../../store/StoreAction";
 import { StoreContext } from "../../store/StoreContext";
 
 // // Mac
-const urlPathResto = "http://localhost/viter-restaurant";
-const imgUrlPathResto = "http://localhost/viter-restaurant/public/img";
+// const urlPathResto = "http://localhost/viter-restaurant";
+// const imgUrlPathResto = "http://localhost/viter-restaurant/public/img";
+
+const urlPathResto = "http://localhost/restaurant-shadcn";
+const imgUrlPathResto = "http://localhost/restaurant-shadcn/public/img";
 
 // // Patrick
 // const urlPathLcss = `https://devapp.fbasapp.com`;

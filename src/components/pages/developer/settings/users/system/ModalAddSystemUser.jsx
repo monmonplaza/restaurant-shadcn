@@ -1,22 +1,28 @@
-import React from "react";
-import ButtonSpinner from "../../../../../partials/spinners/ButtonSpinner";
-import Modal from "../../../../../partials/wrapper/Modal";
+import Combobox from "@/components/ui/combobox";
+import { Input } from "@/components/ui/input";
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from "@/components/ui/select";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
-import { StoreContext } from "../../../../../../store/StoreContext";
+import { Form, Formik } from "formik";
+import React from "react";
+import { FaTimes } from "react-icons/fa";
+import * as Yup from "yup";
 import {
   setIsAdd,
   setMessage,
   setSuccess,
   setValidate,
 } from "../../../../../../store/StoreAction";
-import * as Yup from "yup";
-import { Form, Formik } from "formik";
+import { StoreContext } from "../../../../../../store/StoreContext";
 import { handleEscape } from "../../../../../helpers/functions-general";
-import { FaTimes } from "react-icons/fa";
 import { queryData } from "../../../../../helpers/queryData";
-import { Input } from "@/components/ui/input";
-import Combobox from "@/components/ui/combobox";
-
+import ButtonSpinner from "../../../../../partials/spinners/ButtonSpinner";
+import Modal from "../../../../../partials/wrapper/Modal";
 const ModalAddSystemUser = ({ itemEdit, roles }) => {
   const { dispatch } = React.useContext(StoreContext);
   const queryClient = useQueryClient();
@@ -78,6 +84,7 @@ const ModalAddSystemUser = ({ itemEdit, roles }) => {
     user_system_fname: itemEdit ? itemEdit.user_system_fname : "",
     user_system_lname: itemEdit ? itemEdit.user_system_lname : "",
     user_system_email: itemEdit ? itemEdit.user_system_email : "",
+    user_system_role: itemEdit ? itemEdit.user_system_role : "",
     // user_system_role_id: getDeveloperRole[0].role_aid,
     user_system_email_old: itemEdit ? itemEdit.user_system_email : "",
   };
@@ -85,7 +92,8 @@ const ModalAddSystemUser = ({ itemEdit, roles }) => {
   const yupSchema = Yup.object({
     user_system_fname: Yup.string().required("Required"),
     user_system_lname: Yup.string().required("Required"),
-    user_system_email: Yup.string().required("Required").email("Invalid email"),
+    // user_system_email: Yup.string().required("Required").email("Invalid email"),
+    // user_system_role: Yup.string().required("Required"),
   });
 
   const handleClose = () => {
@@ -143,7 +151,34 @@ const ModalAddSystemUser = ({ itemEdit, roles }) => {
                   </div>
 
                   <div className="form__wrap">
-                    <Combobox roles={roles} />
+                    {/* <Combobox roles={roles} /> */}
+                  </div>
+
+                  <div className="form__wrapper">
+                    <Select
+                      onValueChange={(e) => e}
+                      defaultValue="developer"
+                      name="user_system_role"
+                    >
+                      <SelectTrigger className="w-[100%]">
+                        <SelectValue placeholder="Select Role" />
+                      </SelectTrigger>
+                      <SelectContent>
+                        {roles?.length > 0 ? (
+                          roles?.map((item, key) => {
+                            return (
+                              <SelectItem value={item.role_aid} key={key}>
+                                {item.role_name}
+                              </SelectItem>
+                            );
+                          })
+                        ) : (
+                          <option value="" disabled>
+                            No data
+                          </option>
+                        )}
+                      </SelectContent>
+                    </Select>
                   </div>
 
                   <div className="modal__action flex justify-end gap-4 mt-8">

@@ -15,6 +15,7 @@ import TableLoading from "../../../../../partials/TableLoading";
 import ModalArchive from "../../../../../partials/modals/ModalArchive";
 import TableSpinner from "../../../../../partials/spinners/TableSpinner";
 
+import ServerError from "@/components/partials/ServerError.jsx";
 import ModalDelete from "../../../../../partials/modals/ModalDelete";
 const SystemUserList = ({ setItemEdit }) => {
   const { store, dispatch } = React.useContext(StoreContext);
